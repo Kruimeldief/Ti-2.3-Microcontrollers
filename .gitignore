@@ -35,11 +35,23 @@
 *.i*86
 *.x86_64
 *.hex
+
+#Build Results
+*.o
+*.d
+*.eep
+*.elf
+*.hex
+*.map
+*.srec
+*.lst
+
+#User Specific Files
 *.atsuo
 
 # Debug folder
 **/Debug
-*/.vs
+.vs/
 
 # Debug files
 *.dSYM/
