@@ -39,7 +39,7 @@
 
 # Debug folder
 **/Debug
-*/.vs
+.vs/
 
 # Debug files
 *.dSYM/
