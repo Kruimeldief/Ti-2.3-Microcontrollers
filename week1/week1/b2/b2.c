@@ -12,7 +12,7 @@
 
 void wait(int ms);
 
-int main(void)
+int derp(void)
 {
 	DDRD =	0b11000000;
 	PORTD = 0b10000000;

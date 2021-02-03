@@ -123,9 +123,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="b2" />
+    <Folder Include="b3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="b2\b2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="b3\b3.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
