@@ -35,6 +35,11 @@
 *.i*86
 *.x86_64
 *.hex
+*.atsuo
+
+# Debug folder
+**/Debug
+*/.vs
 
 # Debug files
 *.dSYM/
