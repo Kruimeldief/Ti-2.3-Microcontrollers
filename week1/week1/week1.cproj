@@ -122,12 +122,16 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="b2\program.c">
-      <SubType>compile</SubType>
-    </Compile>
+    <Folder Include="b2" />
+    <Folder Include="b3" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="b2" />
+    <Compile Include="b2\b2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="b3\b3.c">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
