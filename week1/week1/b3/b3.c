@@ -6,7 +6,7 @@
 
 void wait(int ms);
 
-int main(void)
+int b3(void)
 {
 	DDRD =	0b11111111;
 	DDRC = 	0b11111110;
