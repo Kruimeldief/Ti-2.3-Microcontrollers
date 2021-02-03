@@ -12,7 +12,7 @@
 
 void wait(int ms);
 
-int main(void){
+int main5(void){
 	DDRC = 0b11111111;
 	char pattern[] = {0b10000000,
 		0b11000000,

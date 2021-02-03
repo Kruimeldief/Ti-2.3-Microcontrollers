@@ -138,6 +138,8 @@
     <Folder Include="b2" />
     <Folder Include="b3" />
     <Folder Include="b5" />
+    <Folder Include="b6" />
+    <Folder Include="b7a" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="b2\b2.c">
@@ -150,6 +152,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="b5\b5.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="b6\b6.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="b7a\b7a.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
