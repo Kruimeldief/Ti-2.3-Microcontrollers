@@ -12,7 +12,7 @@
 
 void wait(int ms);
 
-int main(void) {
+int derp4(void) {
 	uint8_t i = 0;
 	
 	DDRC = 0xFF;

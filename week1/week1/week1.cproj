@@ -135,11 +135,6 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="b2" />
-    <Folder Include="b3" />
-    <Folder Include="b5" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="b2\b2.c">
       <SubType>compile</SubType>
     </Compile>
@@ -149,7 +144,7 @@
     <Compile Include="b4\b4.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="b5\b5.c">
+    <Compile Include="b6\b6.c">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
@@ -157,6 +152,7 @@
     <Folder Include="b2" />
     <Folder Include="b3" />
     <Folder Include="b4" />
+    <Folder Include="b6" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
