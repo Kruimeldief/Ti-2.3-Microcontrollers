@@ -10,17 +10,23 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+void wait(int ms);
+
 int main(void) {
 	uint8_t i = 0;
 	
-	DDRD = 0xFF;
-	PORTD = 0x01;
+	DDRC = 0xFF;
+	PORTC = 0x01;
 	
 	while (1) {
-		if (i >= 7) {
-			PORTD = 1 << i;
+		if (i < 8) {
+			PORTC = 1 << i;
+			i++;
 		} else {
-			PORTD = 0x01;
+			PORTC = 0x01;
+			i = 0;
 		}
+		
+		wait(50);
 	}
 }
