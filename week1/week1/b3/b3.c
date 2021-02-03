@@ -1,6 +1,9 @@
 /*
- * program.c
+ * b3.c
  *
- * Created: 3-2-2021 12:14:10
- *  Author: Dennis
+ * Created: 2/3/2021 12:23:52 PM
+ *  Author: Shinichi
  */ 
+int main(void){
+	
+}
