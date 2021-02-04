@@ -16,7 +16,7 @@ void detectButton(void);
 int main(void) {
 	uint8_t step = 25; // in milliseconds.
 	uint16_t counter = 0; // in milliseconds.
-	uint16_t ms = 1000; // in millihertz.
+	uint16_t ms = 1000; // in milli Hertz.
 	uint8_t isPressed = 0;
 	
 	DDRD = 0xFF;
@@ -29,7 +29,7 @@ int main(void) {
 		if (PINC == 0x80) {
 			if (!isPressed) {
 				isPressed = 1;
-				// Chance the frequency of the blinking effect.
+				// Change the frequency of the blinking effect.
 				if (ms == 1000) ms = 250;
 				else if (ms == 4000) ms = 1000;
 				else ms = 1000;
@@ -39,13 +39,14 @@ int main(void) {
 		}
 		
 		// Wait if the counter hasn't reached the blinking frequency.
+		// divide by 2 to blink on and off within set Hertz.
 		if (counter >= (ms / 2)) {
 			PORTD ^= 0x80;
 			counter = 0;
-			wait(step);
 		} else {
 			counter += step;
-			wait(step);
 		}
+		
+		wait(step);
 	}
 }
