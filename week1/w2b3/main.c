@@ -17,11 +17,14 @@
 #define F_CPU 8e6
 #include <avr/io.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
 
 char digitLookUpTable[] = {0b00111111, 0b00110000, 0b01011011, 0b01001111, 0b01100110, 0b01101101, 
 	0b01111101,	0b00000111, 0b01111111, 0b01101111, 0b01110111, 0b01111100, 0b01011000,0b01011110, 
 	0b01111001, 0b01110001};
 	char errorDigit = 0b11011000;
+
+char state = 0;
 
 // 7 seg
 // PORTD dp G F E D C B A
@@ -29,41 +32,52 @@ char digitLookUpTable[] = {0b00111111, 0b00110000, 0b01011011, 0b01001111, 0b011
 
 void setDigit(char);
 
-void handleInput(char);
-/******************************************************************
-short:			Busy wait number of millisecs
-inputs:			int ms (Number of millisecs to busy wait)
-outputs:	
-notes:			Busy wait, not very accurate. Make sure (external)
-				clock value is set. This is used by _delay_ms inside
-				util/delay.h
-Version :    	DMK, Initial code
-*******************************************************************/
+void handleState(char);
+
 void wait( int ms ) {
 	for (int i=0; i<ms; i++) {
 		_delay_ms( 1 );		// library function (max 30 ms at 8MHz)
 	}
 }
 
-
-/******************************************************************
-short:			main() loop, entry point of executable
-inputs:
-outputs:
-notes:
-Version :    	DMK, Initial code
-*******************************************************************/
-int main( void ) {
-	DDRD = 0b11111111;					// PORTD all output 
-	DDRC = 0b00000000;
+ISR( INT0_vect ) {
+	EIMSK &= 0b11111110;//turn off interupt
 	
-	while (1==1) {
-		while( 1 ) {
-			// Write data to PORTD	
-			handleInput(PINC);
-			wait(100);
-			
-		}
+	state &= 0b11111110;
+	state |= (EICRA & 0b00000001);
+	
+	EICRA ^= 0b00000001;//flip rizing faling
+			handleState(state);
+
+	EIMSK |= 0b00000001;//turn on interupt
+}
+
+ISR( INT1_vect ) {
+	EIMSK &=0b11111101;//turn off interupt
+	
+	state &= 0b11111101;
+	state |= ((EICRA & 0b00000100) >> 1);
+	
+	EICRA ^= 0b00000100;//flip rizing faling
+			handleState(state);
+
+	EIMSK |= 0b00000010;//turn on interupt
+}
+
+int main( void ) {
+	// Init I/O
+DDRE = 0b11111111;					// PORTD all output
+DDRD = 0b00000000;
+DDRA = 0xFF;
+	// Init Interrupt hardware
+	EICRA |= 0b00001111;
+	EIMSK |= 0x03;			// Enable INT1 & INT0
+	
+	// Enable global interrupt system
+	//SREG = 0x80;			// Of direct via SREG of via wrapper
+	sei();
+
+	while (1) {
 	}
 
 	return 1;
@@ -72,22 +86,24 @@ int main( void ) {
 void setDigit(char value){
 	if (value >= 0 && value <= 15)
 	{
-		PORTD = digitLookUpTable[(int)value];
+		PORTE = digitLookUpTable[(int)value];
 	}else{
-		PORTD = errorDigit;
+		PORTE = errorDigit;
 	}
 }
 
-void handleInput(char port){
+void handleState(char state){
 	static int position = 0;
-	if (port & 0b00000001 && port & 0b00000010)
+	PORTA = state;
+	if (state == 0b00000011)
 	{
 		position = 0;
-	}else if (port & 0b00000001)
+	}else if (state == 0b00000001)
 	{
 		position++;
-	}else if(port & 0b00000010){
+		}else if(state == 0b00000010){
 		position--;
 	}
 	setDigit(position);
+
 }
