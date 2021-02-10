@@ -154,9 +154,6 @@
     <Compile Include="b6\b6.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="b6\b6.c">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="b7a\b7a.c">
       <SubType>compile</SubType>
     </Compile>

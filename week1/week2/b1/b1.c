@@ -45,7 +45,7 @@ ISR( INT1_vect ) {
     PORTD &= ~(1<<5);		
 }
 
-int main( void ) {
+int main1( void ) {
 	DDRD = 0xF0;	// PORTD(7:4) output, PORTD(3:0) input	
 	EICRA |= 0x0B;	// INT1 falling edge, INT0 rising edge
 	EIMSK |= 0x03;	// Enable INT1 & INT0

@@ -4,6 +4,7 @@
  * Created: 2/3/2021 2:18:24 PM
  *  Author: Shinichi
  */ 
+/*
 #define F_CPU 8e6
 
 #include <avr/io.h>
@@ -88,4 +89,4 @@ if (PinD & 0b10000000)
 {
 	fp = &start;
 }
-}
+}*/
