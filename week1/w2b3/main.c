@@ -47,7 +47,7 @@ ISR( INT0_vect ) {
 	state |= (EICRA & 0b00000001);
 	
 	EICRA ^= 0b00000001;//flip rizing faling
-			handleState(state);
+	handleState(state);
 
 	EIMSK |= 0b00000001;//turn on interupt
 }
@@ -59,22 +59,18 @@ ISR( INT1_vect ) {
 	state |= ((EICRA & 0b00000100) >> 1);
 	
 	EICRA ^= 0b00000100;//flip rizing faling
-			handleState(state);
+	handleState(state);
 
 	EIMSK |= 0b00000010;//turn on interupt
 }
 
 int main( void ) {
-	// Init I/O
-DDRE = 0b11111111;					// PORTD all output
-DDRD = 0b00000000;
-DDRA = 0xFF;
-	// Init Interrupt hardware
+	DDRE = 0b11111111;					
+	DDRD = 0b00000000;
+	DDRA = 0xFF;
+
 	EICRA |= 0b00001111;
-	EIMSK |= 0x03;			// Enable INT1 & INT0
-	
-	// Enable global interrupt system
-	//SREG = 0x80;			// Of direct via SREG of via wrapper
+	EIMSK |= 0x03;			
 	sei();
 
 	while (1) {
