@@ -13,7 +13,7 @@
 void wait(int ms);
 void detectButton(void);
 
-int main6(void) {
+int main(void) {
 	uint8_t step = 25; // in milliseconds.
 	uint16_t counter = 0; // in milliseconds.
 	uint16_t ms = 1000; // in milli Hertz.

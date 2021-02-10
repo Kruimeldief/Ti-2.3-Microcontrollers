@@ -46,9 +46,6 @@
 *.srec
 *.lst
 
-#User Specific Files
-*.atsuo
-
 # Debug folder
 **/Debug
 .vs/
