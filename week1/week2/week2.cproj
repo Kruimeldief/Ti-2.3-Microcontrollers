@@ -125,9 +125,13 @@
     <Compile Include="b1\b1.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="b2\b2.c">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="b1" />
+    <Folder Include="b2" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
