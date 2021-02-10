@@ -18,7 +18,7 @@ void s2(char PinD, void (*fp)(void) );
 void s3(char PinD, void (*fp)(void) );
 void end(char PinD,  void (*fp)(void) );
 
-int main(void){
+int derp7a(void){
 	printf("hello");
 	DDRD = 0;
 	DDRC = 0b11111111;
