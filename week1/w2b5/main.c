@@ -64,8 +64,8 @@ void lcd_strobe_lcd_e(void) {
 
 /******************************************************************
 short:			Init LCD module in 4 bits mode.
-inputs:
-outputs:
+inputs:			-
+outputs:		Init steps to LCD module
 notes:			According datasheet HD44780 table 12
 Version :    	DMK, Initial code
 *******************************************************************/

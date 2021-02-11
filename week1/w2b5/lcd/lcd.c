@@ -19,7 +19,7 @@ outputs:		-
 notes:			According datasheet HD44780 table 12
 Version :    	DMK, Initial code
 *******************************************************************/
-void init_4bits_mode(void) {
+void init( void ) {
 	// PORTC output mode and all low (also E and RS pin)
 	DDRD = 0xFF;
 	DDRA = 0xFF;
@@ -60,7 +60,7 @@ outputs:
 notes:			According datasheet HD44780 table 12
 Version :    	DMK, Initial code
 *******************************************************************/
-void lcd_write_data(unsigned char byte) {
+void lcd_write_data( unsigned char byte ) {
 	// First nibble.
 	PORTC = byte;
 	PORTA |= (1<<LCD_RS);
@@ -91,9 +91,20 @@ void lcd_write_command(unsigned char byte) {
 	lcd_strobe_lcd_e();
 }
 
-
 void lcd_clear() {
 	lcd_write_command (0x01);						//Leeg display
 	_delay_ms(2);
 	lcd_write_command (0x80);						//Cursor terug naar start
+}
+
+void lcd_write_string(char *str) {
+	for(;*str; str++){
+		lcd_write_data(*str);
+	}
+}
+
+void set_cursor( int position ) {
+	// TODO make robust
+		lcd_write_command(0x80 | position);
+	}
 }
