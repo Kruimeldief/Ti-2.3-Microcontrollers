@@ -51,6 +51,16 @@ void init( void ) {
 	lcd_strobe_lcd_e();
 	PORTC = 0x60;
 	lcd_strobe_lcd_e();
+	
+	// Clear screen to be safe
+	lcd_clear();
+}
+
+void lcd_strobe_lcd_e(void) {
+	PORTA |= (1<<LCD_E);	// E high
+	_delay_ms(1);
+	PORTA &= ~(1<<LCD_E);  	// E low
+	_delay_ms(1);
 }
 
 /******************************************************************
@@ -92,12 +102,12 @@ void lcd_write_command(unsigned char byte) {
 }
 
 void lcd_clear() {
-	lcd_write_command (0x01);						//Leeg display
+	lcd_write_command (0x01); //Leeg display
 	_delay_ms(2);
-	lcd_write_command (0x80);						//Cursor terug naar start
+	lcd_write_command (0x80); //Cursor terug naar start
 }
 
-void lcd_write_string(char *str) {
+void display_text(char *str) {
 	for(;*str; str++){
 		lcd_write_data(*str);
 	}
@@ -105,6 +115,5 @@ void lcd_write_string(char *str) {
 
 void set_cursor( int position ) {
 	// TODO make robust
-		lcd_write_command(0x80 | position);
-	}
+	lcd_write_command(0x80 | position);
 }
