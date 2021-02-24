@@ -15,7 +15,7 @@ ISR( INT1_vect ) {
 	PORTA = 1 << (stepperLight % 8);
 }
 
-int main( void ) {
+int derp2( void ) {
 	// Init I/O
 	DDRA = 0b11111111;		// PORTA(0:7) output
 
