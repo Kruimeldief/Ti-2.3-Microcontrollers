@@ -7,18 +7,12 @@
 
 #define F_CPU 8e6
 
+#include <stdio.h>
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
-//#include "lcd.h"
+#include "lcd/lcd.h"
 
-
-// Build in led Arduino on PB7 (pin 13)
-void wait( int ms ) {
-	for (int i=0; i<ms; i++) {
-		_delay_ms( 1 );		// library function (max 30 ms at 8MHz)
-	}
-}
 
 void setupCounter(void) {
 	TCCR2 |= 0b00000111;
@@ -26,13 +20,32 @@ void setupCounter(void) {
 	sei();
 }
 
-
 int main(void) {
 	DDRB = 0xFF;
 	setupCounter();
+	wait(10);
+	init();
+	wait(10);
+
+	lcd_clear();
+	wait(10);
+	int lastValue = 0;
+
 	while (1)  {
 		wait(50);
-		PORTB = TCNT2;
+		
+		if (lastValue != TCNT2)
+		{
+			if (TCNT2 < lastValue)
+			{
+				lcd_clear();
+			}
+			char numStr[12];
+			sprintf(numStr, "%d", TCNT2);
+			set_cursor(0);
+			display_text(numStr);
+			lastValue = TCNT2;
+		}		
 	}
 	return 0;
 }
