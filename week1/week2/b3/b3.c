@@ -82,7 +82,7 @@ Version :    	DMK, Initial code
 
 	return 1;
 }*/
-void main(void){
+void derp3(void){
 	DDRD = 0xff;
 	while (1)
 	{
