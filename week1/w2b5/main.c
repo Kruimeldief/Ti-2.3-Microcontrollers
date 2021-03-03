@@ -1,18 +1,9 @@
-/* ---------------------------------------------------------------------------
-** This software is in the public domain, furnished "as is", without technical
-** support, and with no warranty, express or implied, as to its usefulness for
-** any purpose.
-**
-** ioisr.c
-**
-** Beschrijving:	BigAVR LCD module
-** Target:			AVR mcu
-** Build:			avr-gcc -std=c99 -Wall -O3 -mmcu=atmega128 -D F_CPU=8000000UL -c lcd.c
-**					avr-gcc -g -mmcu=atmega128 -o lcd.elf lcd.o
-**					avr-objcopy -O ihex lcd.elf lcd.hex
-**					or type 'make'
-** Author: 			dkroeske@gmail.com
-** -------------------------------------------------------------------------*/
+/*
+ * main.c
+ *
+ * Created: 2/10/2021 11:22:39 AM
+ * Author: Dennis Kruijt & Shinichi Hezemans
+ */ 
 
 #define F_CPU 8e6
 
@@ -40,7 +31,7 @@ int main( void ) {
 
 	// Write sample string
 	display_text("Hello world!");
-	set_cursor()
+	set_cursor(12);
 
 	// Loop forever
 	while (1) {
