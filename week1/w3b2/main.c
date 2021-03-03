@@ -1,8 +1,8 @@
 /*
-* w3b2.c
+* main.c
 *
 * Created: 2/24/2021 9:15:21 AM
-* Author : Shinichi
+* Author: Dennis Kruijt & Shinichi Hezemans & Merijn Couweleers
 */
 
 #define F_CPU 8e6

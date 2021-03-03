@@ -3,7 +3,7 @@
 ** support, and with no warranty, express or implied, as to its usefulness for
 ** any purpose.
 **
-** lookup.c
+** lookup.c (main.c)
 **
 ** Beschrijving:	Ledpatroon op PORTD dmv table lookup (scheiding logica en data)    
 ** Target:			AVR mcu

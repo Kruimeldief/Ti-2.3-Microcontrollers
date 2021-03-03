@@ -1,0 +1,57 @@
+/*
+ * main.c
+ *
+ * Created: 3-2-2021 13:57:55
+ * Author: Dennis Kruijt & Shinichi Hezemans
+ */
+
+#define F_CPU 8e6
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+void wait(int ms);
+
+int main(void) {
+	uint8_t step = 25; // in milliseconds.
+	uint16_t counter = 0; // in milliseconds.
+	uint16_t ms = 1000; // in milli Hertz.
+	uint8_t isPressed = 0; // bool
+	
+	DDRD = 0xFF;
+	PORTD = 0x00;
+	DDRC = 0x00;
+	
+	while (1) {
+		
+		// Check if button is pressed.
+		if (PINC == 0x80) {
+			if (!isPressed) {
+				isPressed = 1;
+				// Change the frequency of the blinking effect.
+				if (ms == 1000) ms = 250;
+				else if (ms == 4000) ms = 1000;
+				else ms = 1000;
+			}
+		} else {
+			isPressed = 0;
+		}
+		
+		// Wait if the counter hasn't reached the blinking frequency.
+		// divide by 2 to blink on and off within set Hertz.
+		if (counter >= (ms / 2)) {
+			PORTD ^= 0x80;
+			counter = 0;
+		} else {
+			counter += step;
+		}
+		
+		wait(step);
+	}
+}
+
+void wait(int ms) {
+	for (int i = 0; i < ms; i++) {
+		_delay_ms(1);
+	}
+}
