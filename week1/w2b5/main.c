@@ -40,6 +40,7 @@ int main( void ) {
 
 	// Write sample string
 	display_text("Hello world!");
+	set_cursor()
 
 	// Loop forever
 	while (1) {
