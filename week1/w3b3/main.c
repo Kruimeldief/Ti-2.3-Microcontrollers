@@ -1,53 +1,54 @@
 /*
- * Lesvoorbeeld_atmega2560.c
- *
- * Created: 10/02/2020 18:26:21
- * Author : Etienne
- */ 
+* main.c
+*
+* Created: 2/24/2021 10:34:51 AM
+* Author: Dennis Kruijt & Shinichi Hezemans & Merijn Couweleers
+*/
 
 #define F_CPU 16e6
-#define BIT(x) (1 << (x))
+#define BIT1(x) (1 << (x))
+#define BIT0(x) (0 << (x))
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
+int msCounter = 0;
+int io = 1;
 
-// Build in led Arduino on PB7 (pin 13)
-void wait( int ms ) {
-	for (int i=0; i<ms; i++) {
-		_delay_ms( 1 );		// library function (max 30 ms at 8MHz)
+void timer2Init( void ) {
+	OCR2 = 519;
+	TCCR2 = 1 << WGM21; // CTC mode
+	
+	/* Enable interrupts */
+	TIMSK = TIMSK | 1<<TOIE1 | 1<<OCIE2;
+	TCCR2 |= 1<<CS22 | 0<<CS21 | 1<<CS20;
+	TCNT2 = 0;
+	sei();
+}
+
+ISR( TIMER2_COMP_vect )
+{
+	msCounter++;
+	
+	if (io && msCounter >= 25) {
+		PORTD = BIT1(7);
+		msCounter = 0;
+		io = 0;
+		
+	} else if (!io && msCounter >= 15) {
+		PORTD = BIT0(7);
+		msCounter = 0;
+		io = 1;
 	}
 }
 
-volatile int tenthValue = 0;
-volatile int CompareValue = 0;
-
-ISR( TIMER2_COMP_vect ) {
-	TCNT2 = 0;
-	tenthValue++;
-}
-
-void setupTimer(void) {
-	cli();
-	OCR2 = CompareValue;
-	TIMSK |= BIT(7);
-	sei();
-	TCCR2 = 0b00011111;
-}
-
-
-int main(void) {
-	DDRD &= ~BIT(7);
-	DDRA = 0xFF;
-	DDRB = 0xFF;
-	setupTimer();
+int main (void)
+{
+	DDRD = 0xFF;
+	timer2Init();
 	
-    while (1)  {
-		PORTA = TCNT2;
-		PORTB = tenthValue;
-		wait(10);
-    }
-	
-	return 0;
+	while(1){
+		// Empty
+	}
 }

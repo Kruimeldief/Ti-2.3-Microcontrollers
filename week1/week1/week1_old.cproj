@@ -13,7 +13,7 @@
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
     <AssemblyName>week1</AssemblyName>
-    <Name>week1</Name>
+    <Name>week1_old</Name>
     <RootNamespace>week1</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
@@ -149,6 +149,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="b4\b4.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="b5\b5.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="b6\b6.c">

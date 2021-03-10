@@ -1,29 +1,22 @@
-/* ---------------------------------------------------------------------------
-** This software is in the public domain, furnished "as is", without technical
-** support, and with no warranty, express or implied, as to its usefulness for
-** any purpose.
-**
-** lookup.c
-**
-** Beschrijving:	Ledpatroon op PORTD dmv table lookup (scheiding logica en data)    
-** Target:			AVR mcu
-** Build:			avr-gcc -std=c99 -Wall -O3 -mmcu=atmega128 -D F_CPU=8000000UL -c switch.c
-**					avr-gcc -g -mmcu=atmega128 -o lookup.elf lookup.o
-**					avr-objcopy -O ihex lookup.elf lookup.hex 
-**					or type 'make'
-** Author: 			dkroeske@gmail.com
-** -------------------------------------------------------------------------*/
+/*
+ * main.c
+ *
+ * Created: 10-2-2021 13:24:52
+ * Author: Dennis Kruijt & Shinichi Hezemans
+ */
 
 #define F_CPU 8e6
+
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
-char digitLookUpTable[] = {0b00111111, 0b00110000, 0b01011011, 0b01001111, 0b01100110, 0b01101101, 
-	0b01111101,	0b00000111, 0b01111111, 0b01101111, 0b01110111, 0b01111100, 0b01011000,0b01011110, 
-	0b01111001, 0b01110001};
-	char errorDigit = 0b11011000;
-
+char digitLookUpTable[] = {
+	0b00111111, 0b00110000, 0b01011011, 0b01001111,
+	0b01100110, 0b01101101, 0b01111101,	0b00000111,
+	0b01111111, 0b01101111, 0b01110111, 0b01111100,
+	0b01011000, 0b01011110, 0b01111001, 0b01110001 };
+char errorDigit = 0b11011000;
 char state = 0;
 
 // 7 seg
@@ -31,7 +24,6 @@ char state = 0;
 //        y y y y x x x x
 
 void setDigit(char);
-
 void handleState(char);
 
 void wait( int ms ) {
@@ -41,27 +33,27 @@ void wait( int ms ) {
 }
 
 ISR( INT0_vect ) {
-	EIMSK &= 0b11111110;//turn off interupt
+	EIMSK &= 0b11111110; // turn off interrupt
 	
 	state &= 0b11111110;
 	state |= (EICRA & 0b00000001);
 	
-	EICRA ^= 0b00000001;//flip rizing faling
+	EICRA ^= 0b00000001; // flip rising/falling edge
 	handleState(state);
 
-	EIMSK |= 0b00000001;//turn on interupt
+	EIMSK |= 0b00000001; // turn on interrupt
 }
 
 ISR( INT1_vect ) {
-	EIMSK &=0b11111101;//turn off interupt
+	EIMSK &=0b11111101; // turn off interrupt
 	
 	state &= 0b11111101;
 	state |= ((EICRA & 0b00000100) >> 1);
 	
-	EICRA ^= 0b00000100;//flip rizing faling
+	EICRA ^= 0b00000100; // flip rising/falling edge
 	handleState(state);
 
-	EIMSK |= 0b00000010;//turn on interupt
+	EIMSK |= 0b00000010; // turn on interrupt
 }
 
 int main( void ) {
@@ -74,16 +66,17 @@ int main( void ) {
 	sei();
 
 	while (1) {
+		// Empty
 	}
 
 	return 1;
 }
 
 void setDigit(char value){
-	if (value >= 0 && value <= 15)
-	{
+	if (value >= 0 && value <= 15) {
 		PORTE = digitLookUpTable[(int)value];
-	}else{
+		
+	} else {
 		PORTE = errorDigit;
 	}
 }
@@ -91,15 +84,16 @@ void setDigit(char value){
 void handleState(char state){
 	static int position = 0;
 	PORTA = state;
-	if (state == 0b00000011)
-	{
+	
+	if (state == 0b00000011) {
 		position = 0;
-	}else if (state == 0b00000001)
-	{
+		
+	} else if (state == 0b00000001) {
 		position++;
-		}else if(state == 0b00000010){
+		
+	} else if(state == 0b00000010) {
 		position--;
 	}
+	
 	setDigit(position);
-
 }

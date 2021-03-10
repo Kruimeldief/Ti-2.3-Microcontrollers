@@ -3,7 +3,7 @@
 ** support, and with no warranty, express or implied, as to its usefulness for
 ** any purpose.
 **
-** ioisr.c
+** ioisr.c (main.c)
 **
 ** Beschrijving:	ISR on PORTD demonstrattion  
 ** Target:			AVR mcu
@@ -18,7 +18,6 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
-
 
 /******************************************************************
 short:			Busy wait number of millisecs
@@ -42,9 +41,9 @@ outputs:
 notes:			Set PORTD.5
 Version :    	DMK, Initial code
 *******************************************************************/
-//ISR( INT0_vect ) {
-//    PORTD |= (1<<5);		
-//}
+ISR( INT0_vect ) {
+    PORTD |= (1<<5);		
+}
 
 /******************************************************************
 short:			ISR INT1
@@ -53,9 +52,9 @@ outputs:
 notes:			Clear PORTD.5
 Version :    	DMK, Initial code
 *******************************************************************/
-//ISR( INT1_vect ) {
-//    PORTD &= ~(1<<5);		
-//}
+ISR( INT1_vect ) {
+    PORTD &= ~(1<<5);		
+}
 
 /******************************************************************
 short:			main() loop, entry point of executable
@@ -64,7 +63,7 @@ outputs:
 notes:			Slow background task after init ISR
 Version :    	DMK, Initial code
 *******************************************************************/
-int main1( void ) {
+int main( void ) {
 	// Init I/O
 	DDRD = 0xF0;			// PORTD(7:4) output, PORTD(3:0) input	
 
