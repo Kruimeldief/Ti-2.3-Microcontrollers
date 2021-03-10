@@ -14,7 +14,7 @@
 
 
 void  adcInit(void){
-	ADMUX = 0b01100011;
+	ADMUX = 0b11100011;
 	ADCSRA = 0b11000110;
 }
 
@@ -38,7 +38,7 @@ int main(void)
 		ADCSRA ^= 0b01000000;
 		
 		char numStr[12];
-		sprintf(numStr, "%d", ADCH <<1);
+		sprintf(numStr, "%03d", ADCH);
 		set_cursor(0);
 		display_text(numStr);
 	}
