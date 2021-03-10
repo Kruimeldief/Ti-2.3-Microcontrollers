@@ -41,6 +41,8 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "w4b2", "w4b2\w4b2.cproj", "
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "w4b3", "w4b3\w4b3.cproj", "{78A8886B-C378-4E71-BAF7-0003E46E205C}"
 EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "w4cb", "w4cb\w4cb.cproj", "{C457901C-E904-46A5-BC23-EFF3C3153827}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -123,10 +125,10 @@ Global
 		{78A8886B-C378-4E71-BAF7-0003E46E205C}.Debug|AVR.Build.0 = Debug|AVR
 		{78A8886B-C378-4E71-BAF7-0003E46E205C}.Release|AVR.ActiveCfg = Release|AVR
 		{78A8886B-C378-4E71-BAF7-0003E46E205C}.Release|AVR.Build.0 = Release|AVR
-		{5795B5B3-6095-4A94-970E-43A52532CC92}.Debug|AVR.ActiveCfg = Debug|AVR
-		{5795B5B3-6095-4A94-970E-43A52532CC92}.Debug|AVR.Build.0 = Debug|AVR
-		{5795B5B3-6095-4A94-970E-43A52532CC92}.Release|AVR.ActiveCfg = Release|AVR
-		{5795B5B3-6095-4A94-970E-43A52532CC92}.Release|AVR.Build.0 = Release|AVR
+		{C457901C-E904-46A5-BC23-EFF3C3153827}.Debug|AVR.ActiveCfg = Debug|AVR
+		{C457901C-E904-46A5-BC23-EFF3C3153827}.Debug|AVR.Build.0 = Debug|AVR
+		{C457901C-E904-46A5-BC23-EFF3C3153827}.Release|AVR.ActiveCfg = Release|AVR
+		{C457901C-E904-46A5-BC23-EFF3C3153827}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
