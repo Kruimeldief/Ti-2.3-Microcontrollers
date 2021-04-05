@@ -25,6 +25,10 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "w4cb", "w4cb\w4cb.cproj", "
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "w4cc", "w4cc\w4cc.cproj", "{AF451127-C4A4-45E1-8BC9-CC66B6F879B7}"
 EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "w4c1a", "w4c1a\w4c1a.cproj", "{5535A289-32D9-4755-9926-097652B05B35}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "w4c1b", "w4c1b\w4c1b.cproj", "{C3BE791A-73DD-4B28-89F7-C174EE240026}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -75,6 +79,14 @@ Global
 		{AF451127-C4A4-45E1-8BC9-CC66B6F879B7}.Debug|AVR.Build.0 = Debug|AVR
 		{AF451127-C4A4-45E1-8BC9-CC66B6F879B7}.Release|AVR.ActiveCfg = Release|AVR
 		{AF451127-C4A4-45E1-8BC9-CC66B6F879B7}.Release|AVR.Build.0 = Release|AVR
+		{5535A289-32D9-4755-9926-097652B05B35}.Debug|AVR.ActiveCfg = Debug|AVR
+		{5535A289-32D9-4755-9926-097652B05B35}.Debug|AVR.Build.0 = Debug|AVR
+		{5535A289-32D9-4755-9926-097652B05B35}.Release|AVR.ActiveCfg = Release|AVR
+		{5535A289-32D9-4755-9926-097652B05B35}.Release|AVR.Build.0 = Release|AVR
+		{C3BE791A-73DD-4B28-89F7-C174EE240026}.Debug|AVR.ActiveCfg = Debug|AVR
+		{C3BE791A-73DD-4B28-89F7-C174EE240026}.Debug|AVR.Build.0 = Debug|AVR
+		{C3BE791A-73DD-4B28-89F7-C174EE240026}.Release|AVR.ActiveCfg = Release|AVR
+		{C3BE791A-73DD-4B28-89F7-C174EE240026}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

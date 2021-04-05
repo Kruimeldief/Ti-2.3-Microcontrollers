@@ -11,6 +11,7 @@ Ext. Modules: Serial 7-seg display
 SW: AVR-GCC
 * NOTES : Turn ON switch 15, PB1/PB2/PB3 to MISO/MOSI/SCK
 */
+#define F_CPU 8e6
 
 #include <avr/io.h>
 #include <util/delay.h>
@@ -111,6 +112,13 @@ void displayOff()
 	spi_slaveDeSelect(0);
 }
 
+// Get the digit at the index of a value
+int get_digit( int value, int index )
+{
+	int digit = value / pow(10, index);
+	return digit % 10;
+}
+
 // Write a value of max 4 digit inclusive leading zero's
 void writeLedDisplay( int value )
 {
@@ -123,13 +131,6 @@ void writeLedDisplay( int value )
 		spi_write( get_digit( value, i-1 ) );
 		spi_slaveDeSelect(0);
 	}
-}
-
-// Get the digit at the index of a value
-int get_digit( int value, int index )
-{
-	int digit = value / pow(10, index);
-	return digit % 10;
 }
 
 int main()
@@ -150,7 +151,7 @@ int main()
 	wait(1000);
 	
 	// write 4-digit data
-	writeLedDisplay(3456);
+	writeLedDisplay(6);
 	
 	wait(1000);
 	

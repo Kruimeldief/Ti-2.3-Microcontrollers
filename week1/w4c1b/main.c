@@ -11,10 +11,12 @@ Ext. Modules: Serial 7-seg display
 SW: AVR-GCC
 * NOTES : Turn ON switch 15, PB1/PB2/PB3 to MISO/MOSI/SCK
 */
+#define F_CPU 8e6
 
 #include <avr/io.h>
 #include <util/delay.h>
 #include <math.h>
+#include <stdlib.h>
 
 #define BIT(x)		( 1 << x )
 #define DDR_SPI		DDRB // spi Data direction register
@@ -111,11 +113,18 @@ void displayOff()
 	spi_slaveDeSelect(0);
 }
 
+// Get the digit at the index of a value
+int get_digit( int value, int index )
+{
+	int digit = value / pow(10, index);
+	return digit % 10;
+}
+
 // Write a value of max 4 digit inclusive leading zero's
 void writeLedDisplay( int value )
 {
 	if ( value < -999 && value > 9999 ) return;
-	uint8_t n_digits = floor( log10( abs( value ) ) );
+	uint8_t n_digits = floor( log10( abs( value ) ) ) + 1;
 	
 	for ( uint8_t i = 1; i <= n_digits; i++ )
 	{
@@ -133,13 +142,6 @@ void writeLedDisplay( int value )
 	}
 }
 
-// Get the digit at the index of a value
-int get_digit( int value, int index )
-{
-	int digit = value / pow(10, index);
-	return digit % 10;
-}
-
 int main()
 {
 	DDRB=0x01; // Set PB0 pin as output for display select
@@ -151,14 +153,14 @@ int main()
 	{
 		spi_slaveSelect(0); // Select display chip
 		spi_write(i); // digit adress: (digit place)
-		spi_write(0); // digit value: 0
+		spi_write(15); // digit value: 0
 		spi_slaveDeSelect(0); // Deselect display chip
 	}
 	
 	wait(1000);
 	
 	// write 4-digit data
-	writeLedDisplay(3456);
+	writeLedDisplay(-4);
 	
 	wait(1000);
 	
